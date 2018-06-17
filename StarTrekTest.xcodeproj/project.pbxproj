@@ -13,6 +13,14 @@
 		BB311A3920D66A6700504F31 /* StarTrekTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB311A3720D66A6700504F31 /* StarTrekTest.xcdatamodeld */; };
 		BB311A3B20D66A6800504F31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB311A3A20D66A6800504F31 /* Assets.xcassets */; };
 		BB311A3E20D66A6800504F31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB311A3C20D66A6800504F31 /* LaunchScreen.storyboard */; };
+		BB311A4620D66E9600504F31 /* Humans.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A4520D66E9600504F31 /* Humans.swift */; };
+		BB311A4D20D66F5900504F31 /* TripulationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A4B20D66F5900504F31 /* TripulationCell.swift */; };
+		BB311A4E20D66F5900504F31 /* TripulationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB311A4C20D66F5900504F31 /* TripulationCell.xib */; };
+		BB311A5020D67A6500504F31 /* Betazoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A4F20D67A6500504F31 /* Betazoid.swift */; };
+		BB311A5220D67A9600504F31 /* Vulcan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A5120D67A9600504F31 /* Vulcan.swift */; };
+		BB311A5420D68DF500504F31 /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A5320D68DF500504F31 /* ExpandableHeaderView.swift */; };
+		BB311A5620D690F700504F31 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A5520D690F700504F31 /* Sections.swift */; };
+		BB311A5A20D6D8E900504F31 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A5920D6D8E900504F31 /* UIExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +32,14 @@
 		BB311A3A20D66A6800504F31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB311A3D20D66A6800504F31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB311A3F20D66A6800504F31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB311A4520D66E9600504F31 /* Humans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Humans.swift; sourceTree = "<group>"; };
+		BB311A4B20D66F5900504F31 /* TripulationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripulationCell.swift; sourceTree = "<group>"; };
+		BB311A4C20D66F5900504F31 /* TripulationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripulationCell.xib; sourceTree = "<group>"; };
+		BB311A4F20D67A6500504F31 /* Betazoid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Betazoid.swift; sourceTree = "<group>"; };
+		BB311A5120D67A9600504F31 /* Vulcan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vulcan.swift; sourceTree = "<group>"; };
+		BB311A5320D68DF500504F31 /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
+		BB311A5520D690F700504F31 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
+		BB311A5920D6D8E900504F31 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,14 +73,70 @@
 			isa = PBXGroup;
 			children = (
 				BB311A3020D66A6700504F31 /* AppDelegate.swift */,
-				BB311A3220D66A6700504F31 /* ViewController.swift */,
-				BB311A3420D66A6700504F31 /* Main.storyboard */,
-				BB311A3A20D66A6800504F31 /* Assets.xcassets */,
-				BB311A3C20D66A6800504F31 /* LaunchScreen.storyboard */,
 				BB311A3F20D66A6800504F31 /* Info.plist */,
-				BB311A3720D66A6700504F31 /* StarTrekTest.xcdatamodeld */,
+				BB311A4820D66F0E00504F31 /* Model */,
+				BB311A4720D66EFE00504F31 /* View */,
+				BB311A4A20D66F2600504F31 /* Controller */,
+				BB311A4920D66F1A00504F31 /* Supporting Files */,
 			);
 			path = StarTrekTest;
+			sourceTree = "<group>";
+		};
+		BB311A4720D66EFE00504F31 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BB311A3420D66A6700504F31 /* Main.storyboard */,
+				BB311A5720D6AA1E00504F31 /* TripulationCell */,
+				BB311A5820D6AA2D00504F31 /* ExpandableHeader */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BB311A4820D66F0E00504F31 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BB311A4520D66E9600504F31 /* Humans.swift */,
+				BB311A4F20D67A6500504F31 /* Betazoid.swift */,
+				BB311A5120D67A9600504F31 /* Vulcan.swift */,
+				BB311A5520D690F700504F31 /* Sections.swift */,
+				BB311A3720D66A6700504F31 /* StarTrekTest.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BB311A4920D66F1A00504F31 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BB311A3A20D66A6800504F31 /* Assets.xcassets */,
+				BB311A3C20D66A6800504F31 /* LaunchScreen.storyboard */,
+				BB311A5920D6D8E900504F31 /* UIExtensions.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BB311A4A20D66F2600504F31 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BB311A3220D66A6700504F31 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BB311A5720D6AA1E00504F31 /* TripulationCell */ = {
+			isa = PBXGroup;
+			children = (
+				BB311A4B20D66F5900504F31 /* TripulationCell.swift */,
+				BB311A4C20D66F5900504F31 /* TripulationCell.xib */,
+			);
+			path = TripulationCell;
+			sourceTree = "<group>";
+		};
+		BB311A5820D6AA2D00504F31 /* ExpandableHeader */ = {
+			isa = PBXGroup;
+			children = (
+				BB311A5320D68DF500504F31 /* ExpandableHeaderView.swift */,
+			);
+			path = ExpandableHeader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +201,7 @@
 				BB311A3E20D66A6800504F31 /* LaunchScreen.storyboard in Resources */,
 				BB311A3B20D66A6800504F31 /* Assets.xcassets in Resources */,
 				BB311A3620D66A6700504F31 /* Main.storyboard in Resources */,
+				BB311A4E20D66F5900504F31 /* TripulationCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,9 +212,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB311A5220D67A9600504F31 /* Vulcan.swift in Sources */,
+				BB311A4D20D66F5900504F31 /* TripulationCell.swift in Sources */,
 				BB311A3320D66A6700504F31 /* ViewController.swift in Sources */,
+				BB311A5A20D6D8E900504F31 /* UIExtensions.swift in Sources */,
 				BB311A3920D66A6700504F31 /* StarTrekTest.xcdatamodeld in Sources */,
+				BB311A5020D67A6500504F31 /* Betazoid.swift in Sources */,
+				BB311A5420D68DF500504F31 /* ExpandableHeaderView.swift in Sources */,
 				BB311A3120D66A6700504F31 /* AppDelegate.swift in Sources */,
+				BB311A5620D690F700504F31 /* Sections.swift in Sources */,
+				BB311A4620D66E9600504F31 /* Humans.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
