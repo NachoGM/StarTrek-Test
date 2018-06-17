@@ -18,9 +18,6 @@ class TripulationCell: UITableViewCell {
     @IBOutlet weak var raceMultiplierView: UIView!
     @IBOutlet weak var raceMultiplierLabel: UILabel!
     
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

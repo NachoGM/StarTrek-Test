@@ -83,6 +83,17 @@ class ViewController: UIViewController, ExpandableHeaderViewDelegate {
         tableView.endUpdates()
     }
     
+    func displayAlertMessage(userTitle: String, userMessage: String) {
+        
+        let myAlert = UIAlertController(title: userTitle, message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
+        let okAction = UIAlertAction(title: "Ok", style: .default) { [weak self] (action) in
+            return
+        }
+        
+        myAlert.addAction(okAction);
+        self.present(myAlert, animated: true, completion: nil);
+    }
+    
 }
 
 extension ViewController: UITableViewDataSource {
@@ -212,7 +223,7 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        displayAlertMessage(userTitle: "Atención", userMessage: "Para habilitar esta funcionalidad, contacte con el desarrollador")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
