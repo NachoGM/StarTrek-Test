@@ -10,7 +10,6 @@ import UIKit
 
 class TripulationCell: UITableViewCell {
 
-    
     @IBOutlet weak var crewIdCharacterLabel: UILabel!
     @IBOutlet weak var areaColorView: UIView!
     @IBOutlet weak var crewIdLabel: UILabel!
@@ -25,7 +24,7 @@ class TripulationCell: UITableViewCell {
         raceMultiplierView.layer.cornerRadius = 10
         raceMultiplierView.layer.borderColor = UIColor.lightGray.cgColor
         crewIdCharacterLabel.textColor = .green
-    }
+    } 
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

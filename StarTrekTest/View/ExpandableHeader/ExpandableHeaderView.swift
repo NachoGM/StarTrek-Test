@@ -10,7 +10,7 @@ import UIKit
 
 protocol ExpandableHeaderViewDelegate {
     func toggleSection(header:ExpandableHeaderView, section: Int)
-}
+} 
 
 class ExpandableHeaderView: UITableViewHeaderFooterView {
 
@@ -32,8 +32,7 @@ class ExpandableHeaderView: UITableViewHeaderFooterView {
         delegate?.toggleSection(header: self, section: cell.section)
     }
     
-    func customInit(title: String, number: Int, section: Int, delegate: ExpandableHeaderViewDelegate) {
-        self.detailTextLabel?.text = String(number)
+    func customInit(title: String, section: Int, delegate: ExpandableHeaderViewDelegate) {
         self.textLabel?.text = title
         self.section = section
         self.delegate = delegate

@@ -7,32 +7,30 @@
 //
 
 import UIKit
-
-
-class GlobalVariables {
-    var humanTripulation = [AnyObject]()
-    var betazoidTripulation = [AnyObject]()
-    var vulcanTripulation = [AnyObject]()
-    let tripulationNumber = Int(arc4random_uniform(430))
-}
+import GameKit
 
 class ViewController: UIViewController, ExpandableHeaderViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
-    // MARK: Declare Variables 
-    var humans = [Humans]()
-    var betazoid = [Betazoid]()
-    var vulcan = [Vulcan]()
+    // MARK: Declare Variables
+    let tripulationNumber = Int(arc4random_uniform(430))
     var sections = [Section]()
-    var globalVariables = GlobalVariables()
-
+    var racesObject = RacesObject()
+    var races = Races()
+    var area = Area()
+    
     // MARK: - Declare ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        initNavigationText()
         registerXibCell()
-        configTripulation(numberOfTripulants: globalVariables.tripulationNumber)
+        configTripulation(numberOfTripulants: tripulationNumber)
+    }
+    
+    func initNavigationText() {
+        navigationItem.setTitle(title: "Wellcome to StarTrek Spacecraft", subtitle: "Today we have \(tripulationNumber) tripulants, each area has \(tripulationNumber / 3) tripulants")
     }
     
     func registerXibCell() {
@@ -40,62 +38,46 @@ class ViewController: UIViewController, ExpandableHeaderViewDelegate {
     }
 
     func configTripulation(numberOfTripulants: Int) {
-        
-        // Config NavigationBar
-        navigationItem.setTitle(title: "Wellcome to StarTrek Spacecraft", subtitle: "Today we have \(abs(numberOfTripulants)) tripulants, each area has \(abs(numberOfTripulants / 3)) tripulants")
-
-        // Color Areas
-        let science = UIColor.blue
-        let engineering = UIColor.red
-        let command = UIColor.yellow
-        
-        // Divide in abs
         let div = abs(numberOfTripulants / 3)
-
-        // Create dicts
-        let humanTrip : [String: Any] = ["crewID": "Command", "crewRace": "Humans", "crewArea": command]
-        let betazoidTrip : [String: Any] = ["crewID": "Engineering", "crewRace": "Betazoid", "crewArea": engineering]
-        let vulcanTrip : [String: Any] = ["crewID": "Science", "crewRace": "Vulcan", "crewArea": science]
-
-        // Add dict into arrays
-        for _ in 0...div {
-            globalVariables.humanTripulation.append(humanTrip as AnyObject)
-            globalVariables.betazoidTripulation.append(betazoidTrip as AnyObject)
-            globalVariables.vulcanTripulation.append(vulcanTrip as AnyObject)
-        }
+        handleSpaceTrip(div: div, numberOfTripulants: numberOfTripulants)
+        configureSections()
+    }
+    
+    func handleSpaceTrip(div: Int, numberOfTripulants: Int) {
+        let dictOfRaces = [races.human, races.betazoid, races.vulcan]
+        let shuffledArray: [String] = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: dictOfRaces) as! [String]
+        let humanTripulation = Humans(crewID: "Command", crewRace: shuffledArray[0], crewArea: area.command)
+        let betazoidTripulation = Betazoid(crewID: "Engineering", crewRace: shuffledArray[1], crewArea: area.engineering)
+        let vulcanTripulation = Vulcan(crewID: "Science", crewRace: shuffledArray[2], crewArea: area.science)
         
-        // Configure Header Sections
-        let sections = [Section(crewID: "Command", crewRace: globalVariables.humanTripulation, crewArea: command, expanded: false),
-                        Section(crewID: "Enyineering", crewRace: globalVariables.betazoidTripulation, crewArea: engineering, expanded: false),
-                        Section(crewID: "Science", crewRace: globalVariables.vulcanTripulation, crewArea: science, expanded: false) ]
+        for _ in 0...div {
+            racesObject.humans.append(humanTripulation)
+            racesObject.betazoid.append(betazoidTripulation)
+            racesObject.vulcan.append(vulcanTripulation)
+        }
+    }
+    
+    func configureSections() {
+        let sections = [Section(crewID: "Command", crewArea: area.command, expanded: false),
+                        Section(crewID: "Enyineering", crewArea: area.engineering, expanded: false),
+                        Section(crewID: "Science", crewArea: area.science, expanded: false) ]
         self.sections = sections
-
     }
     
     // MARK: - Handle Delegate for Expandable Header View
     func toggleSection(header: ExpandableHeaderView, section: Int) {
         sections[section].expanded = !sections[section].expanded
-        
         tableView.beginUpdates()
+
         for i in 0..<sections[section].crewID.count {
             tableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
         }
         tableView.endUpdates()
     }
     
-    func displayAlertMessage(userTitle: String, userMessage: String) {
-        
-        let myAlert = UIAlertController(title: userTitle, message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
-        let okAction = UIAlertAction(title: "Ok", style: .default) { [weak self] (action) in
-            return
-        }
-        
-        myAlert.addAction(okAction);
-        self.present(myAlert, animated: true, completion: nil);
-    }
-    
 }
 
+// MARK: - Display TableView DataSource & Delegate Extensions
 extension ViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -103,83 +85,51 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].crewID.count
+        return tripulationNumber / 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var race = ["Human","Betazoid","Vulcan"]
-        race.shuffle()
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "tripulationCell") as! TripulationCell
-        
         let crewID = sections[indexPath.section].crewID
-        let crewRace :String = race.first!
-        let idCharacter = crewRace.first!.description.uppercased()
-        let multiplier = setMultiplier(indexPath: indexPath, crewRace: crewRace)
-
+        let human = racesObject.humans[indexPath.section]
+        let vulcan = racesObject.vulcan[indexPath.section]
+        let betazoide = racesObject.betazoid[indexPath.section]
+        
         switch indexPath.section {
         case 0:
-            return configCell(tableView: tableView, crewID: crewID, idCharacter: idCharacter, crewRace: crewRace, multiplier: multiplier, area: .yellow)
+            return configCell(tableView: tableView, crewID: crewID, idCharacter: human.crewRace.first!.description.uppercased(), crewRace: human.crewRace, multiplier: checkInCommand(crewRace: human.crewRace), area: human.crewArea)
         case 1:
-            return configCell(tableView: tableView, crewID: crewID, idCharacter: idCharacter, crewRace: crewRace, multiplier: multiplier, area: .red)
+            return configCell(tableView: tableView, crewID: crewID, idCharacter: betazoide.crewRace.first!.description.uppercased(), crewRace: betazoide.crewRace, multiplier: checkInEnyineering(crewRace: betazoide.crewRace), area: betazoide.crewArea)
         case 2:
-            return configCell(tableView: tableView, crewID: crewID, idCharacter: idCharacter, crewRace: crewRace, multiplier: multiplier, area: .blue)
+            return configCell(tableView: tableView, crewID: crewID, idCharacter: vulcan.crewRace.first!.description.uppercased(), crewRace: vulcan.crewRace, multiplier: checkInScience(crewRace: vulcan.crewRace), area: vulcan.crewArea)
         default:
-            print("Error")
+            print(" Error in cellForRoww ")
         }
         
         return cell
     }
     
-    // MARK: Handle Multiplier depending the Section and race
-    func setMultiplier(indexPath: IndexPath, crewRace: String) -> String {
-        
-        var multiplier = String()
-        
-        if sections[indexPath.section].crewID == "Command" {
-            multiplier = checkInCommand(crewRace: crewRace)
-            
-        } else if sections[indexPath.section].crewID == "Enyineering" {
-            multiplier = checkInEnyineering(crewRace: crewRace)
-            
-        } else if sections[indexPath.section].crewID == "Science" {
-            multiplier = checkInScience(crewRace: crewRace)
-            
-        } else {
-            print(" ERROR ")
-        }
-        return multiplier
-    }
-    
-    enum Race: String {
-        case Human = "Human"
-        case Betazoid = "Betazoid"
-        case Vulcan = "Vulcan"
-    }
-    
+    // MARK: Handle Multiplicators for Cells
     func checkInCommand(crewRace:String) -> String {
-        
         var multiplier = String()
-
-        if crewRace == Race.Human.rawValue {
+        if crewRace == races.human {
             multiplier = "x3"
-        } else if crewRace == Race.Betazoid.rawValue {
+        } else if crewRace == races.betazoid {
             multiplier = "x2"
-        } else if crewRace == Race.Vulcan.rawValue {
+        } else if crewRace == races.vulcan {
             multiplier = "x1"
         }
         return multiplier
     }
-    
+     
     func checkInEnyineering(crewRace:String) -> String {
         var multiplier = String()
-
-        if crewRace == Race.Human.rawValue {
+        if crewRace == races.human {
             multiplier = "x1"
-        } else if crewRace == Race.Betazoid.rawValue {
+        } else if crewRace == races.betazoid {
             multiplier = "x3"
-        } else if crewRace == Race.Vulcan.rawValue {
+        } else if crewRace == races.vulcan {
             multiplier = "x2"
         }
         return multiplier
@@ -187,12 +137,11 @@ extension ViewController: UITableViewDataSource {
     
     func checkInScience(crewRace:String) -> String {
         var multiplier = String()
-
-        if crewRace == Race.Human.rawValue {
+        if crewRace == races.human {
             multiplier = "x1"
-        } else if crewRace == Race.Betazoid.rawValue {
+        } else if crewRace == races.betazoid {
             multiplier = "x2"
-        } else if crewRace == Race.Vulcan.rawValue {
+        } else if crewRace == races.vulcan {
             multiplier = "x3"
         }
         return multiplier
@@ -207,7 +156,6 @@ extension ViewController: UITableViewDataSource {
         cell.crewRaceLabel.text = crewRace
         cell.raceMultiplierLabel.text = multiplier
         cell.crewIdCharacterLabel.text = idCharacter
-        cell.selectionStyle = .none
         return cell
     }
 }
@@ -217,12 +165,13 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ExpandableHeaderView()
         header.textLabel?.numberOfLines = 0
-        header.customInit(title: sections[section].crewID, number: sections[section].crewRace.count, section: section, delegate: self)
+        header.customInit(title: sections[section].crewID, section: section, delegate: self)
         header.layer.backgroundColor = UIColor.purple.cgColor
         return header
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         displayAlertMessage(userTitle: "Atención", userMessage: "Para habilitar esta funcionalidad, contacte con el desarrollador")
     }
     

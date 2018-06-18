@@ -8,18 +8,12 @@
 
 import Foundation
 import UIKit
-
+ 
 struct Vulcan {
     
     var crewID: String = ""
     var crewRace: String!
     var crewArea: UIColor!
-    
-    init(with dict: [String: Any]) {
-        self.crewID = dict["crewID"] as? String ?? ""
-        self.crewRace = dict["crewRace"] as? String ?? ""
-        self.crewArea = dict["crewArea"] as? UIColor
-    }
     
     init(crewID: String, crewRace: String, crewArea: UIColor) {
         self.crewID = crewID

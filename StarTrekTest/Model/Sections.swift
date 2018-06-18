@@ -7,17 +7,15 @@
 //
 
 import Foundation
-import UIKit
+import UIKit 
 
 struct Section {
     var crewID: String = ""
-    var crewRace: [AnyObject]!
     var crewArea: UIColor!
     var expanded: Bool!
     
-    init(crewID: String, crewRace: [AnyObject], crewArea: UIColor, expanded: Bool) {
+    init(crewID: String, crewArea: UIColor, expanded: Bool) {
         self.crewID = crewID
-        self.crewRace = crewRace
         self.crewArea = crewArea
         self.expanded = expanded
     }

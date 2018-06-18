@@ -26,7 +26,7 @@ extension UINavigationItem {
         customDescription.textAlignment = .center
         customDescription.textColor = .white
         customDescription.sizeToFit()
-        
+         
         let stackView = UIStackView(arrangedSubviews: [customTitle, customDescription])
         stackView.distribution = .equalCentering
         stackView.axis = .vertical
@@ -41,22 +41,27 @@ extension UINavigationItem {
     }
 }
 
-extension Array {
-    /// Returns an array containing this sequence shuffled
-    var shuffled: Array {
-        var elements = self
-        return elements.shuffle()
-    }
-    /// Shuffles this sequence in place
-    @discardableResult
-    mutating func shuffle() -> Array {
-        let count = self.count
-        indices.lazy.dropLast().forEach {
-            swapAt($0, Int(arc4random_uniform(UInt32(count - $0))) + $0)
+extension MutableCollection {
+    /// Shuffle the elements of `self` in-place.
+    mutating func shuffle() {
+        for i in indices.dropLast() {
+            let diff = distance(from: i, to: endIndex)
+            let j = index(i, offsetBy: numericCast(arc4random_uniform(numericCast(diff))))
+            swapAt(i, j)
         }
-        return self
     }
-    var chooseOne: Element { return self[Int(arc4random_uniform(UInt32(count)))] }
-    func choose(_ n: Int) -> Array { return Array(shuffled.prefix(n)) }
 }
 
+
+extension UIViewController {
+    func displayAlertMessage(userTitle: String, userMessage: String) {
+        
+        let myAlert = UIAlertController(title: userTitle, message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
+            return
+        }
+        
+        myAlert.addAction(okAction);
+        self.present(myAlert, animated: true, completion: nil);
+    }
+}
