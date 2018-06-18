@@ -21,7 +21,7 @@
 		BB311A5420D68DF500504F31 /* ExpandableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A5320D68DF500504F31 /* ExpandableHeaderView.swift */; };
 		BB311A5620D690F700504F31 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A5520D690F700504F31 /* Sections.swift */; };
 		BB311A5A20D6D8E900504F31 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A5920D6D8E900504F31 /* UIExtensions.swift */; };
-		BB311A5C20D708DE00504F31 /* Races.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A5B20D708DD00504F31 /* Races.swift */; };
+		BB311A5C20D708DE00504F31 /* GlobalClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB311A5B20D708DD00504F31 /* GlobalClasses.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,7 @@
 		BB311A5320D68DF500504F31 /* ExpandableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableHeaderView.swift; sourceTree = "<group>"; };
 		BB311A5520D690F700504F31 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
 		BB311A5920D6D8E900504F31 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
-		BB311A5B20D708DD00504F31 /* Races.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Races.swift; sourceTree = "<group>"; };
+		BB311A5B20D708DD00504F31 /* GlobalClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalClasses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +98,10 @@
 			isa = PBXGroup;
 			children = (
 				BB311A5520D690F700504F31 /* Sections.swift */,
-				BB311A5B20D708DD00504F31 /* Races.swift */,
 				BB311A4520D66E9600504F31 /* Humans.swift */,
 				BB311A4F20D67A6500504F31 /* Betazoid.swift */,
 				BB311A5120D67A9600504F31 /* Vulcan.swift */,
+				BB311A5B20D708DD00504F31 /* GlobalClasses.swift */,
 				BB311A3720D66A6700504F31 /* StarTrekTest.xcdatamodeld */,
 			);
 			path = Model;
@@ -220,7 +220,7 @@
 				BB311A3320D66A6700504F31 /* ViewController.swift in Sources */,
 				BB311A5A20D6D8E900504F31 /* UIExtensions.swift in Sources */,
 				BB311A3920D66A6700504F31 /* StarTrekTest.xcdatamodeld in Sources */,
-				BB311A5C20D708DE00504F31 /* Races.swift in Sources */,
+				BB311A5C20D708DE00504F31 /* GlobalClasses.swift in Sources */,
 				BB311A5020D67A6500504F31 /* Betazoid.swift in Sources */,
 				BB311A5420D68DF500504F31 /* ExpandableHeaderView.swift in Sources */,
 				BB311A3120D66A6700504F31 /* AppDelegate.swift in Sources */,
